@@ -4,14 +4,20 @@ import (
 	"./img/load"
 	"./img/edit"
 	"./img/output"
+	"./cfgReader"
 )
 
 func main() {
-	layerImg := load.Load("1.png")
-	coverImg := load.Load("2.png")
+	config := cfgReader.Read()
 
-	edit.Paste(&layerImg, 50, 0, &coverImg)
+	layerImg := load.Load("cfg/" + config.CraftingTable.Gui)
+	coverImg := load.Load("cfg/2.png")
 
-	output.Output("3.gif", &layerImg)
+	place := config.CraftingTable.Place
+	edit.PasteArr(&layerImg, place[0], &coverImg)
+	edit.PasteArr(&layerImg, place[2], &coverImg)
+	edit.PasteArr(&layerImg, place[4], &coverImg)
+
+	output.Output("cfg/3.png", &layerImg)
 }
 
