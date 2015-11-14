@@ -1,7 +1,7 @@
 {
 	"craftingTable": {
 		"gui": "crafting_table.png",
-		"size": [ 176, 166 ],
+		"trim": [ 7, 6, 168, 79 ],
 		"place": [
 			[ 30, 17 ],
 			[ 48, 17 ],
@@ -17,7 +17,7 @@
 	},
 	"furnace": {
 		"gui": "furnace.png",
-		"size": [ 176, 166 ],
+		"trim": [ 7, 6, 168, 79 ],
 		"place": [
 			[ 56, 53 ],
 			[ 56, 17 ],

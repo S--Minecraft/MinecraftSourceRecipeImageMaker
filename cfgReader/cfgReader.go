@@ -12,12 +12,12 @@ type Config struct {
 }
 type CraftingTable struct {
 	Gui string `json:"gui"`
-	Size []uint `json:"size"`
+	Trim []uint `json:"trim"`
 	Place [][]int `json:"place"`
 }
 type Furnace struct {
 	Gui string `json:"gui"`
-	Size []uint `json:"size"`
+	Trim []uint `json:"trim"`
 	Place [][]int `json:"place"`
 	Override []Override `json:"override"`
 }
