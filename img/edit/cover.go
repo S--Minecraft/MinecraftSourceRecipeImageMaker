@@ -2,14 +2,20 @@ package edit
 
 import (
 	"image"
+	"fmt"
 )
 
 // backの(a, b)にfrontを貼り付け
-func Paste(back *image.Image, a int, b int, front *image.Image) {
+func Paste(back *image.Image, xx int, yy int, front *image.Image) {
 	size := (*front).Bounds().Size()
 	for x := 0; x < size.X; x++ {
 		for y := 0; y < size.Y; y++ {
-			(*back).(*image.NRGBA).Set(x+a, y+b, (*front).At(x,y))
+			color := (*front).At(x,y)
+			fmt.Println(color.RGBA())
+			r, g, b, a :=color.RGBA()
+			if !(r == 0 && g == 0 && b == 0 && a == 0) {
+				(*back).(*image.NRGBA).Set(x+xx, y+yy, color)
+			}
 		}
 	}
 }
