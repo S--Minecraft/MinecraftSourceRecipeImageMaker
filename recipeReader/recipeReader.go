@@ -3,6 +3,7 @@ package recipeReader
 import (
 	"encoding/json"
 	"io/ioutil"
+	"path"
 	"fmt"
 )
 
@@ -25,5 +26,19 @@ func Read(path string) (recipeMain RecipeMain) {
 		fmt.Println("Recipe read error: ", err)
 	}
 	json.Unmarshal(file, &recipeMain)
+	return
+}
+
+func ReadAll(dir string) (recipeMains []RecipeMain) {
+	if files, err := ioutil.ReadDir(dir); err != nil {
+		fmt.Println("Assets folder read error:", err)
+	} else {
+		for _, file := range files {
+			if path.Ext(file.Name()) == ".json" {
+				recipeMain := Read(dir + "/" + file.Name())
+				recipeMains = append(recipeMains, recipeMain)
+			}
+		}
+	}
 	return
 }

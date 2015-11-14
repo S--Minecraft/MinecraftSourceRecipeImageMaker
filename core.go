@@ -6,34 +6,19 @@ import (
 	"./img/output"
 	"./cfgReader"
 	"./recipeReader"
-	//"fmt"
 )
 
 func main() {
 	config := cfgReader.Read()
 
-	recipe := recipeReader.Read("assets/amt.json")
-
-	for _, recipeType := range recipe.RecipeType {
-		if recipeType.Type == "craftingTable" {
-			craftingTable(&recipeType.Recipes, &config)
+	allRecipe := recipeReader.ReadAll("assets")
+	for _, recipe := range allRecipe {
+		for _, recipeType := range recipe.RecipeType {
+			if recipeType.Type == "craftingTable" {
+				craftingTable(&recipeType.Recipes, &config)
+			}
 		}
 	}
-
-	/*
-	layerImg := load.Load("cfg/" + config.CraftingTable.Gui)
-	coverImg := load.Load("assets/2.png")
-
-	place := config.CraftingTable.Place
-	edit.PasteArr(&layerImg, place[0], &coverImg)
-	edit.PasteArr(&layerImg, place[2], &coverImg)
-	edit.PasteArr(&layerImg, place[4], &coverImg)
-	edit.PasteArr(&layerImg, place[9], &coverImg)
-
-	layerImg = edit.TrimArr(&layerImg, config.CraftingTable.Trim)
-
-	output.Output("output/3.png", &layerImg)
-	*/
 }
 
 func craftingTable(recipes *[]recipeReader.Recipe, config *cfgReader.Config) {
