@@ -6,6 +6,8 @@ import (
 	"image/png"
 	"image/jpeg"
 	"image/gif"
+	"regexp"
+	"strconv"
 	"os"
 	"path"
 )
@@ -32,8 +34,29 @@ func encode(filePath *string, img *image.Image, file *os.File) {
 	}
 }
 
+func isExist(filePath string) bool {
+	_, err := os.Stat(filePath)
+	return err == nil
+}
+
 func Output(filePath string, img *image.Image) {
 	var file *os.File
+	if isExist(filePath) {
+		reg := regexp.MustCompile(`(.*)\((\d)\)\.(.*?)$`)
+		match := reg.FindAllStringSubmatch(filePath, -1)
+		if len(match) > 0 {
+			if n, errr := strconv.Atoi(match[0][2]); errr != nil {
+				fmt.Println("File name number string convert error: ", err)
+			} else {
+				nStr := strconv.Itoa(n + 1)
+				Output(match[0][1] + "(" + nStr + ")." + match[0][3], img)
+			}
+		} else {
+			reg = regexp.MustCompile(`(.*)\.(.*?)$`)
+			match = reg.FindAllStringSubmatch(filePath, -1)
+			Output(match[0][1] + "(1)." + match[0][2], img)
+		}
+	}
 	if file, err = os.Create(filePath); err != nil {
 		fmt.Println("Output create error: ", err)
 		return
