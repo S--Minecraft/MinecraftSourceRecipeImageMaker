@@ -4,3 +4,7 @@
 
 # allow any
 !.gitignore
+!MinecraftSourceRecipeImageMaker.exe
+!readme.txt
+!/assets/
+!/cfg/config.json
