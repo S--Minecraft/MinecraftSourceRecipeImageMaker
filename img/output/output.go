@@ -56,6 +56,7 @@ func Output(filePath string, img *image.Image) {
 			match = reg.FindAllStringSubmatch(filePath, -1)
 			Output(match[0][1] + "(1)." + match[0][2], img)
 		}
+		return
 	}
 	if file, err = os.Create(filePath); err != nil {
 		fmt.Println("Output create error: ", err)
