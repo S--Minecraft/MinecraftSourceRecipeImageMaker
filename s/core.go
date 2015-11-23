@@ -58,12 +58,12 @@ func readTypes(configs *map[string]cfgReader.Config, layerImgs *map[string]image
 func readRecipe(recipes *[]recipeReader.Recipe, cfg *cfgReader.Config, layer *image.Image) {
 	for _, recipe := range *recipes {
 		waitGroup.Add(1) //処理をカウント
-		go makeImg(&recipe, cfg, *layer)
+		go makeImg(recipe, cfg, *layer)
 	}
 	return
 }
 
-func makeImg(recipe *recipeReader.Recipe, cfg *cfgReader.Config, layer image.Image) {
+func makeImg(recipe recipeReader.Recipe, cfg *cfgReader.Config, layer image.Image) {
 	layerImg := edit.Copy(layer)
 	place := cfg.Place
 
