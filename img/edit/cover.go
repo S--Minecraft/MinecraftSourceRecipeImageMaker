@@ -2,6 +2,7 @@ package edit
 
 import (
 	"image"
+	"../../cfgReader"
 )
 
 // backの(a, b)にfrontを貼り付け
@@ -28,4 +29,25 @@ func PasteArr(back *image.Image, arr []int, front *image.Image) {
 
 func PasteArrOffset(back *image.Image, arr []int, offset []uint, front *image.Image) {
 	PasteOffset(back, arr[0], arr[1], int(offset[0]), int(offset[1]), front)
+}
+
+func Override(img *image.Image, x1 int, y1 int, x2 int, y2 int, toX int, toY int) {
+	coverSizeX := x2 - x1
+	coverSizeY := y2 - y1
+
+	for x := 0; x <= coverSizeX; x++ {
+		for y := 0; y <= coverSizeY; y++ {
+			color := (*img).At(x1 + x, y1 + y)
+			r, g, b, _ :=color.RGBA()
+			if !(r == 0 && g == 0 && b == 0) {
+				(*img).(*image.NRGBA).Set(toX + x, toY + y, color)
+			}
+		}
+	}
+}
+
+func OverrideCfg(img *image.Image, override *cfgReader.Override) {
+	b := override.Before
+	a := override.After
+	Override(img, int(b[0]), int(b[1]), int(b[2]), int(b[3]), int(a[0]), int(a[1]))
 }

@@ -26,10 +26,14 @@ func main() {
 			layer, ok := layerImgs[recipeType.Type]
 			if !ok {
 				layer = load.Load("cfg/" + config.Gui)
+				if config.Override != nil {
+					for _, override := range config.Override {
+						edit.OverrideCfg(&layer, &override)
+					}
+				}
 				layer = edit.TrimArr(&layer, config.Trim)
 				layerImgs[recipeType.Type] = layer
 			}
-
 			readRecipe(&recipeType.Recipes, &config, layer)
 		}
 	}
