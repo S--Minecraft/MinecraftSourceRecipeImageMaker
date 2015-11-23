@@ -32,6 +32,7 @@ func encode(filePath *string, img *image.Image, file *os.File) {
 	} else {
 		fmt.Println("Not compatible image type error")
 	}
+	return
 }
 
 func isExist(filePath string) bool {
@@ -64,4 +65,5 @@ func Output(filePath string, img *image.Image) {
 	}
 	encode(&filePath, img, file)
 	defer file.Close()
+	return
 }
