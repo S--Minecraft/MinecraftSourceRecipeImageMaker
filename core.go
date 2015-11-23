@@ -1,6 +1,7 @@
 package main
 
 import (
+	"image"
 	"./img/load"
 	"./img/edit"
 	"./img/output"
@@ -10,38 +11,44 @@ import (
 
 func main() {
 	var configs map[string]cfgReader.Config = make(map[string]cfgReader.Config)
+	var layerImgs map[string]image.Image = make(map[string]image.Image)
 
 	allRecipe := recipeReader.ReadAll("assets")
 	for _, recipe := range allRecipe {
 		for _, recipeType := range recipe.RecipeType {
+			// 対応config読み込み(読み込み済みでない場合ファイルロード)
 			config, ok := configs[recipeType.Type]
 			if !ok {
 				config = cfgReader.Read(recipeType.Type)
 				configs[recipeType.Type] = config
 			}
-			readRecipe(&recipeType.Recipes, &config)
+			// 対応画像読み込み(読み込み済みでない場合ファイルロード)
+			layer, ok := layerImgs[recipeType.Type]
+			if !ok {
+				layer = load.Load("cfg/" + config.Gui)
+				layer = edit.TrimArr(&layer, config.Trim)
+				layerImgs[recipeType.Type] = layer
+			}
+
+			readRecipe(&recipeType.Recipes, &config, layer)
 		}
 	}
 }
 
-func readRecipe(recipes *[]recipeReader.Recipe, cfg *cfgReader.Config) {
-	layerImg := load.Load("cfg/" + cfg.Gui)
+func readRecipe(recipes *[]recipeReader.Recipe, cfg *cfgReader.Config, layerImg image.Image) {
 	place := cfg.Place
 
 	rs := *recipes
 	for _, recipe := range rs {
-		lImg := layerImg
-
 		for i, item := range recipe.Shape {
 			if item != "" {
 				imgPath := "assets/" + recipe.Img[item] + ".png"
 				img := load.Load(imgPath)
-				edit.PasteArr(&lImg, place[i], &img)
+				edit.PasteArrOffset(&layerImg, place[i], cfg.Trim, &img)
 			}
 		}
 
-		lImg = edit.TrimArr(&lImg, cfg.Trim)
 		shape := recipe.Shape
-		output.Output("output/" + recipe.Img[shape[len(shape) - 1]] + ".png", &lImg)
+		output.Output("output/" + recipe.Img[shape[len(shape) - 1]] + ".png", &layerImg)
 	}
 }

@@ -5,7 +5,7 @@ import (
 )
 
 func Trim(img *image.Image, x1 uint, y1 uint, x2 uint, y2 uint) image.Image {
-	img2 := image.NewRGBA(image.Rect(0, 0, int(x2 - x1), int(y2 - y1)))
+	img2 := image.NewNRGBA(image.Rect(0, 0, int(x2 - x1), int(y2 - y1)))
 	size := (*img2).Bounds().Size()
 	for x := 0; x < size.X; x++ {
 		for y := 0; y < size.Y; y++ {

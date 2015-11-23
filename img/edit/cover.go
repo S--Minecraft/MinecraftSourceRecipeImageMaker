@@ -18,6 +18,14 @@ func Paste(back *image.Image, xx int, yy int, front *image.Image) {
 	}
 }
 
+func PasteOffset(back *image.Image, xx int, yy int, offsetX int, offsetY int, front *image.Image) {
+	Paste(back, xx - offsetX, yy - offsetY, front)
+}
+
 func PasteArr(back *image.Image, arr []int, front *image.Image) {
 	Paste(back, arr[0], arr[1], front)
+}
+
+func PasteArrOffset(back *image.Image, arr []int, offset []uint, front *image.Image) {
+	PasteOffset(back, arr[0], arr[1], int(offset[0]), int(offset[1]), front)
 }
