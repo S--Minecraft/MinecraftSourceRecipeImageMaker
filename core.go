@@ -9,47 +9,22 @@ import (
 )
 
 func main() {
-	config := cfgReader.Read()
+	var configs map[string]cfgReader.Config = make(map[string]cfgReader.Config)
 
 	allRecipe := recipeReader.ReadAll("assets")
 	for _, recipe := range allRecipe {
 		for _, recipeType := range recipe.RecipeType {
-			if recipeType.Type == "craftingTable" {
-				craftingTable(&recipeType.Recipes, &config)
+			config, ok := configs[recipeType.Type]
+			if !ok {
+				config = cfgReader.Read(recipeType.Type)
+				configs[recipeType.Type] = config
 			}
-			if recipeType.Type == "furnace" {
-				furnace(&recipeType.Recipes, &config)
-			}
+			readRecipe(&recipeType.Recipes, &config)
 		}
 	}
 }
 
-func craftingTable(recipes *[]recipeReader.Recipe, config *cfgReader.Config) {
-	cfg := config.CraftingTable
-
-	layerImg := load.Load("cfg/" + cfg.Gui)
-	place := cfg.Place
-
-	rs := *recipes
-	for _, recipe := range rs {
-		lImg := layerImg
-
-		for i, item := range recipe.Shape {
-			if item != "" {
-				imgPath := "assets/" + recipe.Img[item] + ".png"
-				img := load.Load(imgPath)
-				edit.PasteArr(&lImg, place[i], &img)
-			}
-		}
-
-		lImg = edit.TrimArr(&lImg, cfg.Trim)
-		output.Output("output/" + recipe.Img[recipe.Shape[len(shape) - 1]] + ".png", &lImg)
-	}
-}
-
-func furnace(recipes *[]recipeReader.Recipe, config *cfgReader.Config) {
-	cfg := config.Furnace
-
+func readRecipe(recipes *[]recipeReader.Recipe, cfg *cfgReader.Config) {
 	layerImg := load.Load("cfg/" + cfg.Gui)
 	place := cfg.Place
 

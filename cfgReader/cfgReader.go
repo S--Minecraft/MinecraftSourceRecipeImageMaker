@@ -7,15 +7,6 @@ import (
 )
 
 type Config struct {
-	CraftingTable CraftingTable `json:"craftingTable"`
-	Furnace Furnace `json:"furnace"`
-}
-type CraftingTable struct {
-	Gui string `json:"gui"`
-	Trim []uint `json:"trim"`
-	Place [][]int `json:"place"`
-}
-type Furnace struct {
 	Gui string `json:"gui"`
 	Trim []uint `json:"trim"`
 	Place [][]int `json:"place"`
@@ -26,8 +17,8 @@ type Override struct {
 	After []uint `json:"after"`
 }
 
-func Read() (config Config) {
-	file, err := ioutil.ReadFile("cfg/config.json")
+func Read(crafter string) (config Config) {
+	file, err := ioutil.ReadFile("cfg/" + crafter + ".json")
 	if err != nil {
 		fmt.Println("Config read error: ", err)
 	}
