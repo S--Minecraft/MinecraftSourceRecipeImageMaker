@@ -2,9 +2,9 @@ package recipeReader
 
 import (
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"path"
-	"fmt"
 )
 
 type RecipeMain struct {
@@ -12,12 +12,12 @@ type RecipeMain struct {
 }
 
 type RecipeType struct {
-	Type string `json:"type"`
+	Type    string   `json:"type"`
 	Recipes []Recipe `json:"recipe"`
 }
 type Recipe struct {
-	Shape []string `json:"shape"`
-	Img map[string]string `json:"img"`
+	Shape []string          `json:"shape"`
+	Img   map[string]string `json:"img"`
 }
 
 func Read(path string) (recipeMain RecipeMain) {

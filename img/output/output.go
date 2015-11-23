@@ -3,13 +3,13 @@ package output
 import (
 	"fmt"
 	"image"
-	"image/png"
-	"image/jpeg"
 	"image/gif"
-	"regexp"
-	"strconv"
+	"image/jpeg"
+	"image/png"
 	"os"
 	"path"
+	"regexp"
+	"strconv"
 )
 
 var err error
@@ -53,13 +53,13 @@ func Output(filePath string, img *image.Image) {
 			} else {
 				//数字がついてる場合は数字を増やす
 				nStr := strconv.Itoa(n + 1)
-				Output(match[0][1] + "(" + nStr + ")." + match[0][3], img)
+				Output(match[0][1]+"("+nStr+")."+match[0][3], img)
 			}
 		} else {
 			//(1)をつける
 			reg = regexp.MustCompile(`(.*)\.(.*?)$`)
 			match = reg.FindAllStringSubmatch(filePath, -1)
-			Output(match[0][1] + "(1)." + match[0][2], img)
+			Output(match[0][1]+"(1)."+match[0][2], img)
 		}
 		return
 	}

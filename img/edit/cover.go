@@ -1,8 +1,8 @@
 package edit
 
 import (
-	"image"
 	"../../cfgReader"
+	"image"
 )
 
 // backの(xx, yy)にfrontを貼り付け
@@ -10,8 +10,8 @@ func Paste(back *image.Image, xx int, yy int, front *image.Image) {
 	size := (*front).Bounds().Size()
 	for x := 0; x < size.X; x++ {
 		for y := 0; y < size.Y; y++ {
-			color := (*front).At(x,y)
-			r, g, b, _ :=color.RGBA()
+			color := (*front).At(x, y)
+			r, g, b, _ := color.RGBA()
 			if !(r == 0 && g == 0 && b == 0) {
 				(*back).(*image.NRGBA).Set(x+xx, y+yy, color)
 			}
@@ -22,7 +22,7 @@ func Paste(back *image.Image, xx int, yy int, front *image.Image) {
 
 // backの(xx+offsetX, yy+offsetY)にfrontを貼り付け
 func PasteOffset(back *image.Image, xx int, yy int, offsetX int, offsetY int, front *image.Image) {
-	Paste(back, xx - offsetX, yy - offsetY, front)
+	Paste(back, xx-offsetX, yy-offsetY, front)
 	return
 }
 
@@ -45,10 +45,10 @@ func Override(img *image.Image, x1 int, y1 int, x2 int, y2 int, toX int, toY int
 
 	for x := 0; x <= coverSizeX; x++ {
 		for y := 0; y <= coverSizeY; y++ {
-			color := (*img).At(x1 + x, y1 + y)
-			r, g, b, _ :=color.RGBA()
+			color := (*img).At(x1+x, y1+y)
+			r, g, b, _ := color.RGBA()
 			if !(r == 0 && g == 0 && b == 0) {
-				(*img).(*image.NRGBA).Set(toX + x, toY + y, color)
+				(*img).(*image.NRGBA).Set(toX+x, toY+y, color)
 			}
 		}
 	}

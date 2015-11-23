@@ -3,9 +3,9 @@ package load
 import (
 	"fmt"
 	"image"
-	"image/png"
-	"image/jpeg"
 	"image/gif"
+	"image/jpeg"
+	"image/png"
 	"os"
 	"path"
 )

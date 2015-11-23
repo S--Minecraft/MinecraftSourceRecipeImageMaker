@@ -71,6 +71,6 @@ func makeImg(recipe *recipeReader.Recipe, cfg *cfgReader.Config, layerImg image.
 	}
 	//作成されるものの名前.pngで出力
 	shape := recipe.Shape
-	output.Output("output/" + recipe.Img[shape[len(shape) - 1]] + ".png", &layerImg)
+	output.Output("output/"+recipe.Img[shape[len(shape)-1]]+".png", &layerImg)
 	return
 }
