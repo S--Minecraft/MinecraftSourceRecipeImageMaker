@@ -57,7 +57,8 @@ func readRecipe(recipes *[]recipeReader.Recipe, cfg *cfgReader.Config, layer *im
 	return
 }
 
-func makeImg(recipe *recipeReader.Recipe, cfg *cfgReader.Config, layerImg image.Image) {
+func makeImg(recipe *recipeReader.Recipe, cfg *cfgReader.Config, layer image.Image) {
+	layerImg := edit.Copy(layer)
 	place := cfg.Place
 
 	for i, item := range recipe.Shape {
