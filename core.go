@@ -1,18 +1,20 @@
 package main
 
 import (
-	"image"
-	"./img/load"
-	"./img/edit"
-	"./img/output"
 	"./cfgReader"
+	"./img/edit"
+	"./img/load"
+	"./img/output"
 	"./recipeReader"
+	"image"
 )
 
 func main() {
+	//ロードされたコンフィグと背景画像
 	var configs map[string]cfgReader.Config = make(map[string]cfgReader.Config)
 	var layerImgs map[string]image.Image = make(map[string]image.Image)
 
+	//すべてのファイルのレシピ一覧
 	allRecipe := recipeReader.ReadAll("assets")
 
 	for _, recipe := range allRecipe {
@@ -49,25 +51,25 @@ func readTypes(configs *map[string]cfgReader.Config, layerImgs *map[string]image
 }
 
 func readRecipe(recipes *[]recipeReader.Recipe, cfg *cfgReader.Config, layer *image.Image) {
-	place := cfg.Place
-
-	rs := *recipes
-	for _, recipe := range rs {
-		makeImg(&recipe, cfg, *layer, &place)
+	for _, recipe := range *recipes {
+		makeImg(&recipe, cfg, *layer)
 	}
 	return
 }
 
-func makeImg(recipe *recipeReader.Recipe, cfg *cfgReader.Config, layerImg image.Image, placeP *[][]int) {
-	place := *placeP
+func makeImg(recipe *recipeReader.Recipe, cfg *cfgReader.Config, layerImg image.Image) {
+	place := cfg.Place
 
 	for i, item := range recipe.Shape {
 		if item != "" {
+			//アイテムのロード
 			imgPath := "assets/" + recipe.Img[item] + ".png"
 			img := load.Load(imgPath)
+			//アイテムを貼り付け
 			edit.PasteArrOffset(&layerImg, place[i], cfg.Trim, &img)
 		}
 	}
+	//作成されるものの名前.pngで出力
 	shape := recipe.Shape
 	output.Output("output/" + recipe.Img[shape[len(shape) - 1]] + ".png", &layerImg)
 	return

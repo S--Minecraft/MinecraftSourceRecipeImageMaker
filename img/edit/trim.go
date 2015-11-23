@@ -4,6 +4,7 @@ import (
 	"image"
 )
 
+//(x1,y1),(x2,y2)を切り出し
 func Trim(img *image.Image, x1 uint, y1 uint, x2 uint, y2 uint) image.Image {
 	img2 := image.NewNRGBA(image.Rect(0, 0, int(x2 - x1), int(y2 - y1)))
 	size := (*img2).Bounds().Size()

@@ -12,6 +12,7 @@ import (
 
 var err error
 
+//拡張子を判別してデコード
 func decode(filePath *string, file *os.File) (img image.Image) {
 	ext := path.Ext(*filePath)
 
