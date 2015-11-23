@@ -2,16 +2,18 @@
 jsonからレシピの画像を生成します  
 
 ##Usage
-`cfgフォルダ`にマイクラのjar内にある`crafting_table.png`を入れ、  
-`assetsフォルダ`にマイクラのjar内にあるアイテムの画像を階層なしで入れ、  
-さらに、`assetsフォルダ`に`**.json`というファイル(**はなんでもいいです)を作り、  
-その中に下のように書けば`MinecraftSourceRecipeImageMaker.exe`をたたけば、  
-`outputフォルダ`に画像が生成されるはずです
+1. `cfgフォルダ`にマイクラのjar内にある`crafting_table.png`を入れる
+2. `assetsフォルダ`を作り、マイクラのjar内にあるアイテムの画像を階層なしで入れる
+3. `assetsフォルダに`**.json`というファイル(**はなんでもいいです)を作る
+4. その中に下のように書く
+5. `outputフォルダ`を作る
+6. `MinecraftSourceRecipeImageMaker.exe`(amd64とついているほうが64bit用、386とついているほうが32bit用です)をたたく
+7. `outputフォルダ`に画像が生成される
 ```
 {
 	"recipes": [
 		{
-			"type": "craftingTable",
+			"type": "craftingTableかfurnaceなど※",
 			"recipe": [
 				{
 					"shape": [
@@ -37,7 +39,18 @@ jsonからレシピの画像を生成します
 		}
 }
 ```
+※craftingTable, furnace, brewingStandが標準で使えます  
+　また、cfgフォルダにcraftingTable.jsonやfurnace.jsonを参考に  
+　設定を書けばMODにある機械のレシピなどにも対応できます  
+　typeの文字列はjsonの名前です  
+
+ - craftingTableの場合  
 shapeの1つめから9つめは各入力スロット(空文字にすれば何もいれないことになります)  
 10こめは出力スロットです  
+ - furnaceの場合  
+shapeの1つ目が材料、2つ目が燃料、3つ目が出力です  
+ - brewingStandの場合  
+shapeの1つ目が材料、2つ目が出力です  
+  
 imgはshapeでそれぞれ指定した文字がどの画像かを示します  
-ex. Xはapple.pngが作画されます  
+例えば、Xはapple.pngが作画されます  
