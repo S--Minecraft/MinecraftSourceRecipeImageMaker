@@ -14,32 +14,39 @@ func main() {
 	var layerImgs map[string]image.Image = make(map[string]image.Image)
 
 	allRecipe := recipeReader.ReadAll("assets")
+
 	for _, recipe := range allRecipe {
 		for _, recipeType := range recipe.RecipeType {
-			// 対応config読み込み(読み込み済みでない場合ファイルロード)
-			config, ok := configs[recipeType.Type]
-			if !ok {
-				config = cfgReader.Read(recipeType.Type)
-				configs[recipeType.Type] = config
-			}
-			// 対応画像読み込み(読み込み済みでない場合ファイルロード)
-			layer, ok := layerImgs[recipeType.Type]
-			if !ok {
-				layer = load.Load("cfg/" + config.Gui)
-				if config.Override != nil {
-					for _, override := range config.Override {
-						edit.OverrideCfg(&layer, &override)
-					}
-				}
-				layer = edit.TrimArr(&layer, config.Trim)
-				layerImgs[recipeType.Type] = layer
-			}
-			readRecipe(&recipeType.Recipes, &config, layer)
+			readRecipe(&configs, &layerImgs, &recipeType)
 		}
 	}
 }
 
-func readRecipe(recipes *[]recipeReader.Recipe, cfg *cfgReader.Config, layerImg image.Image) {
+func readRecipe(configs *map[string]cfgReader.Config, layerImgs *map[string]image.Image, recipeType *recipeReader.RecipeType) {
+	// 対応config読み込み(読み込み済みでない場合ファイルロード)
+	cfgs := *configs
+	config, ok := cfgs[recipeType.Type]
+	if !ok {
+		config = cfgReader.Read(recipeType.Type)
+		cfgs[recipeType.Type] = config
+	}
+	// 対応画像読み込み(読み込み済みでない場合ファイルロード)
+	lImgs := *layerImgs
+	layer, ok := lImgs[recipeType.Type]
+	if !ok {
+		layer = load.Load("cfg/" + config.Gui)
+		if config.Override != nil {
+			for _, override := range config.Override {
+				edit.OverrideCfg(&layer, &override)
+			}
+		}
+		layer = edit.TrimArr(&layer, config.Trim)
+		lImgs[recipeType.Type] = layer
+	}
+	makeImg(&recipeType.Recipes, &config, layer)
+}
+
+func makeImg(recipes *[]recipeReader.Recipe, cfg *cfgReader.Config, layerImg image.Image) {
 	place := cfg.Place
 
 	rs := *recipes
