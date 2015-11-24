@@ -4,7 +4,7 @@ jsonからレシピの画像を生成します
 ##Usage
 1. `cfgフォルダ`にマイクラのjar内にある`crafting_table.png`を入れる
 2. `assetsフォルダ`を作り、マイクラのjar内にあるアイテムの画像を階層なしで入れる
-3. `assetsフォルダに`**.json`というファイル(**はなんでもいいです)を作る
+3. `assetsフォルダ`に`**.json`というファイル(**はなんでもいいです)を作る
 4. その中に下のように書く
 5. `outputフォルダ`を作る
 6. `MinecraftSourceRecipeImageMaker.exe`(amd64とついているほうが64bit用、386とついているほうが32bit用です)をたたく
