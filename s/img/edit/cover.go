@@ -38,20 +38,31 @@ func PasteArrOffset(back *image.Image, arr []int, offset []uint, front *image.Im
 	return
 }
 
-// imgの(x1,y1),(x2,y2)の長方形を(toX,toY)に貼り付け
-func Override(img *image.Image, x1 int, y1 int, x2 int, y2 int, toX int, toY int) {
+// frontの(x1,y1),(x2,y2)の長方形をbackの(toX,toY)に貼り付け
+func OverrideMulti(front *image.Image, x1 int, y1 int, x2 int, y2 int, back *image.Image, toX int, toY int) {
 	coverSizeX := x2 - x1
 	coverSizeY := y2 - y1
 
 	for x := 0; x <= coverSizeX; x++ {
 		for y := 0; y <= coverSizeY; y++ {
-			color := (*img).At(x1+x, y1+y)
+			color := (*front).At(x1+x, y1+y)
 			r, g, b, _ := color.RGBA()
 			if !(r == 0 && g == 0 && b == 0) {
-				(*img).(*image.NRGBA).Set(toX+x, toY+y, color)
+				(*back).(*image.NRGBA).Set(toX+x, toY+y, color)
 			}
 		}
 	}
+	return
+}
+
+func OverrideMultiArr(front *image.Image, from []int, back *image.Image, to []int) {
+	OverrideMulti(front, from[0], from[1], from[2], from[3], back, to[0], to[1])
+	return
+}
+
+// imgの(x1,y1),(x2,y2)の長方形を(toX,toY)に貼り付け
+func Override(img *image.Image, x1 int, y1 int, x2 int, y2 int, toX int, toY int) {
+	OverrideMulti(img, x1, y1, x2, y2, img, toX, toY)
 	return
 }
 

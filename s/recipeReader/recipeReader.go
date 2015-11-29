@@ -18,6 +18,7 @@ type RecipeType struct {
 type Recipe struct {
 	Shape []string          `json:"shape"`
 	Img   map[string]string `json:"img"`
+	Number int `json:"number"`
 }
 
 func Read(path string) (recipeMain RecipeMain) {

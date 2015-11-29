@@ -16,6 +16,7 @@ func main() {
 	//ロードされたコンフィグと背景画像
 	var configs map[string]cfgReader.Config = make(map[string]cfgReader.Config)
 	var layerImgs map[string]image.Image = make(map[string]image.Image)
+	edit.InitNumber()
 
 	//すべてのファイルのレシピ一覧
 	allRecipe := recipeReader.ReadAll("assets")
@@ -76,8 +77,13 @@ func makeImg(recipe recipeReader.Recipe, cfg *cfgReader.Config, layer image.Imag
 			edit.PasteArrOffset(&layerImg, place[i], cfg.Trim, &img)
 		}
 	}
-	//作成されるものの名前.pngで出力
+	//出力個数を出力
 	shape := recipe.Shape
+	if recipe.Number != 0 && recipe.Number != 1 {
+		edit.PasteNumberArrOffset(&layerImg, recipe.Number, place[len(shape)-1], cfg.Trim)
+	}
+
+	//作成されるものの名前.pngで出力
 	output.Output("output/"+recipe.Img[shape[len(shape)-1]]+".png", &layerImg)
 
 	defer waitGroup.Done() //完了をwaitGroupに知らせる
