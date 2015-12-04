@@ -45,7 +45,7 @@ func Output(filePath string, img *image.Image) {
 	var file *os.File
 	//存在するなら名前を変更
 	if isExist(filePath) {
-		reg := regexp.MustCompile(`(.*)\((\d)\)\.(.*?)$`)
+		reg := regexp.MustCompile(`(.*) \((\d+)\)\.(.*?)$`)
 		match := reg.FindAllStringSubmatch(filePath, -1)
 		if len(match) > 0 {
 			if n, errr := strconv.Atoi(match[0][2]); errr != nil {
@@ -53,13 +53,13 @@ func Output(filePath string, img *image.Image) {
 			} else {
 				//数字がついてる場合は数字を増やす
 				nStr := strconv.Itoa(n + 1)
-				Output(match[0][1]+"("+nStr+")."+match[0][3], img)
+				Output(match[0][1]+" ("+nStr+")."+match[0][3], img)
 			}
 		} else {
 			//(1)をつける
 			reg = regexp.MustCompile(`(.*)\.(.*?)$`)
 			match = reg.FindAllStringSubmatch(filePath, -1)
-			Output(match[0][1]+"(1)."+match[0][2], img)
+			Output(match[0][1]+" (1)."+match[0][2], img)
 		}
 		return
 	}
