@@ -24,7 +24,7 @@ func loadJson() {
 	}
 	json.Unmarshal(file, &numberJson)
 	for _, n := range numberJson.Numbers {
-		number = append(number, []image.Point{image.Pt(n[0], n[1]),image.Pt(n[2], n[3])})
+		number = append(number, []image.Point{image.Pt(n[0], n[1]), image.Pt(n[2], n[3])})
 	}
 	return
 }
@@ -59,7 +59,7 @@ func PasteNumber(back *image.Image, num int, xx int, yy int) {
 		if i, err := strconv.Atoi(string(n)); err != nil {
 			fmt.Println("Number String Convert Error: ", err)
 		} else {
-			OverrideMultiArr(&numberImg, number[i], back, image.Pt(xx - width + 1 + offsetX, yy - height + 1))
+			OverrideMultiArr(&numberImg, number[i], back, image.Pt(xx-width+1+offsetX, yy-height+1))
 
 			offsetX += number[i][1].Y - number[i][0].Y + 1
 		}
