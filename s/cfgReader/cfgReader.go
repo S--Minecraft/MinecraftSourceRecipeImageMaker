@@ -1,11 +1,11 @@
 package cfgReader
 
 import (
+	"../util"
 	"encoding/json"
 	"fmt"
 	"image"
 	"io/ioutil"
-	"../util"
 )
 
 type Config2 struct {
@@ -20,17 +20,17 @@ type Override struct {
 }
 
 type Config struct {
-	Gui string
-	Trim []image.Point
-	Place []image.Point
+	Gui      string
+	Trim     []image.Point
+	Place    []image.Point
 	Override []Override
 }
 
 func parse(cfg2 Config2) Config {
 	cfg := Config{
-		Gui: cfg2.Gui,
-		Trim: util.UiToPoints(cfg2.Trim),
-		Place: util.IArrToPoints(cfg2.Place),
+		Gui:      cfg2.Gui,
+		Trim:     util.UiToPoints(cfg2.Trim),
+		Place:    util.IArrToPoints(cfg2.Place),
 		Override: cfg2.Override,
 	}
 	return cfg

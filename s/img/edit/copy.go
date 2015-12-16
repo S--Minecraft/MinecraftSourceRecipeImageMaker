@@ -1,6 +1,6 @@
 package edit
 
-import(
+import (
 	"image"
 )
 
@@ -16,4 +16,3 @@ func Copy(img image.Image) image.Image {
 	}
 	return img2
 }
-

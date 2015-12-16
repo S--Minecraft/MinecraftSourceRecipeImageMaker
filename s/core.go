@@ -6,10 +6,10 @@ import (
 	"./img/load"
 	"./img/output"
 	"./recipeReader"
-	"image"
-	"sync"
-	"regexp"
 	"fmt"
+	"image"
+	"regexp"
+	"sync"
 )
 
 var waitGroup sync.WaitGroup //平行処理用
@@ -89,7 +89,7 @@ func makeImg(recipe recipeReader.Recipe, cfg *cfgReader.Config, layer image.Imag
 	//作成されるものの名前.pngで出力
 	output.Output("output/"+recipe.Img[shape[len(shape)-1]]+".png", &layerImg)
 
-	fmt.Println("Outputed:",recipe.Img[shape[len(shape)-1]])
+	fmt.Println("Outputed:", recipe.Img[shape[len(shape)-1]])
 
 	defer waitGroup.Done() //完了をwaitGroupに知らせる
 	return

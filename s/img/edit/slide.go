@@ -53,15 +53,15 @@ func Slide(img *image.Image, length int, option bool, option2 bool) image.Image 
 			if !(r == 0 && g == 0 && b == 0) {
 				//縦横の入れ替えの場合
 				if option {
-					img2.Set(x2, y2 + offset, c)
+					img2.Set(x2, y2+offset, c)
 				} else {
-					img2.Set(y2 + offset, x2, c)
+					img2.Set(y2+offset, x2, c)
 				}
 			}
 		}
 
 		//ずらす分
-		if (x2 % length == 0) {
+		if x2%length == 0 {
 			offset++
 		}
 	}

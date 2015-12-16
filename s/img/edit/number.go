@@ -1,21 +1,21 @@
 package edit
 
-import(
+import (
+	"../load"
+	"encoding/json"
+	"fmt"
 	"image"
 	"io/ioutil"
-	"fmt"
-	"encoding/json"
 	"strconv"
-	"../load"
 )
 
 type Number struct {
 	Numbers [][]int `json:"numbers"`
 }
 
-var numberJson Number;
+var numberJson Number
 var number [][]int
-var numberImg image.Image;
+var numberImg image.Image
 
 func loadJson() {
 	file, err := ioutil.ReadFile("assets/number/number.json")
@@ -46,7 +46,7 @@ func PasteNumber(back *image.Image, num int, xx int, yy int) {
 			fmt.Println("Number String Convert Error: ", err)
 		} else {
 			width += number[i][2] - number[i][0] + 1
-			if number[i][3] - number[i][1] > height {
+			if number[i][3]-number[i][1] > height {
 				height = number[i][3] - number[i][1]
 			}
 		}

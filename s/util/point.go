@@ -1,8 +1,8 @@
 package util
 
-import(
-	"image"
+import (
 	"fmt"
+	"image"
 )
 
 func IToPoint(i []int) (p image.Point) {
@@ -16,10 +16,10 @@ func IToPoint(i []int) (p image.Point) {
 
 func IToPoints(i []int) []image.Point {
 	p := make([]image.Point, len(i))
-	if !(2<len(i) && len(i)%2 == 0) {
+	if !(2 < len(i) && len(i)%2 == 0) {
 		fmt.Println("failed to convert []int to []image.Point")
 	} else {
-		for j := 0; j < len(i); j=+2 {
+		for j := 0; j < len(i); j = +2 {
 			p[j] = image.Pt(i[j], i[j+1])
 		}
 	}
@@ -49,13 +49,13 @@ func UiToPoint(i []uint) (p image.Point) {
 
 func UiToPoints(i []uint) []image.Point {
 	p := make([]image.Point, len(i))
-	if !(2<len(i) && len(i)%2 == 0) {
+	if !(2 < len(i) && len(i)%2 == 0) {
 		fmt.Println("failed to convert []uint to []image.Point")
 	} else {
 		k := 0
 		for j := 0; j < len(i); j++ {
 			p[j] = image.Pt(int(i[k]), int(i[k+1]))
-			k =+ 2
+			k = +2
 		}
 	}
 	return p
