@@ -8,6 +8,7 @@ import (
 	"./recipeReader"
 	"image"
 	"sync"
+	"regexp"
 )
 
 var waitGroup sync.WaitGroup //平行処理用
@@ -73,6 +74,10 @@ func makeImg(recipe recipeReader.Recipe, cfg *cfgReader.Config, layer image.Imag
 			//アイテムのロード
 			imgPath := "assets/" + recipe.Img[item] + ".png"
 			img := load.Load(imgPath)
+			if isBlock(imgPath) {
+				img = edit.Cube(&img)
+				img = edit.Resize(&img, 16, 16)
+			}
 			//アイテムを貼り付け
 			edit.PasteArrOffset(&layerImg, place[i], cfg.Trim, &img)
 		}
@@ -88,4 +93,10 @@ func makeImg(recipe recipeReader.Recipe, cfg *cfgReader.Config, layer image.Imag
 
 	defer waitGroup.Done() //完了をwaitGroupに知らせる
 	return
+}
+
+func isBlock(path string) bool {
+	reg := regexp.MustCompile(`block/.*`)
+	match := reg.FindString(path)
+	return (match != "")
 }
