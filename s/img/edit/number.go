@@ -14,7 +14,7 @@ type Number struct {
 }
 
 var numberJson Number
-var number [][]int
+var number [][]image.Point
 var numberImg image.Image
 
 func loadJson() {
@@ -23,7 +23,9 @@ func loadJson() {
 		fmt.Println("Number json read error: ", err)
 	}
 	json.Unmarshal(file, &numberJson)
-	number = numberJson.Numbers
+	for _, n := range numberJson.Numbers {
+		number = append(number, []image.Point{image.Pt(n[0], n[1]),image.Pt(n[2], n[3])})
+	}
 	return
 }
 func loadImg() {
@@ -45,9 +47,9 @@ func PasteNumber(back *image.Image, num int, xx int, yy int) {
 		if i, err := strconv.Atoi(string(n)); err != nil {
 			fmt.Println("Number String Convert Error: ", err)
 		} else {
-			width += number[i][2] - number[i][0] + 1
-			if number[i][3]-number[i][1] > height {
-				height = number[i][3] - number[i][1]
+			width += number[i][1].X - number[i][0].X + 1
+			if number[i][1].Y-number[i][0].Y > height {
+				height = number[i][1].Y - number[i][0].Y
 			}
 		}
 	}
@@ -57,9 +59,9 @@ func PasteNumber(back *image.Image, num int, xx int, yy int) {
 		if i, err := strconv.Atoi(string(n)); err != nil {
 			fmt.Println("Number String Convert Error: ", err)
 		} else {
-			OverrideMultiArr(&numberImg, number[i], back, []int{xx - width + 1 + offsetX, yy - height + 1})
+			OverrideMultiArr(&numberImg, number[i], back, image.Pt(xx - width + 1 + offsetX, yy - height + 1))
 
-			offsetX += number[i][3] - number[i][1] + 1
+			offsetX += number[i][1].Y - number[i][0].Y + 1
 		}
 	}
 	return
