@@ -64,7 +64,7 @@ func readTypes(recipeType *recipeReader.RecipeType) {
 
 // レシピのそれぞれの画像出力
 func makeImg(recipe recipeReader.Recipe, cfg *cfgReader.Config, layer image.Image) {
-	layerImg := edit.Copy(layer)
+	layerImg := edit.Copy(&layer)
 	place := cfg.Place
 
 	for i, item := range recipe.Shape {

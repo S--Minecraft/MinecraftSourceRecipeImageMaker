@@ -2,17 +2,11 @@ package edit
 
 import (
 	"image"
+	"image/draw"
 )
 
-func Copy(img image.Image) image.Image {
-	bounds := img.Bounds()
-	size := bounds.Size()
-	img2 := image.NewNRGBA(bounds)
-	for x := 0; x < size.X; x++ {
-		for y := 0; y < size.Y; y++ {
-			color := img.At(x, y)
-			img2.Set(x, y, color)
-		}
-	}
+func Copy(img *image.Image) image.Image {
+	img2 := image.NewNRGBA((*img).Bounds())
+	draw.Draw(img2, img2.Bounds(), *img, image.ZP, draw.Src)
 	return img2
 }
