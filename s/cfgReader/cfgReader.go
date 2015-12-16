@@ -3,10 +3,12 @@ package cfgReader
 import (
 	"encoding/json"
 	"fmt"
+	"image"
 	"io/ioutil"
+	"../util"
 )
 
-type Config struct {
+type Config2 struct {
 	Gui      string     `json:"gui"`
 	Trim     []uint     `json:"trim"`
 	Place    [][]int    `json:"place"`
@@ -17,11 +19,29 @@ type Override struct {
 	After  []uint `json:"after"`
 }
 
-func Read(crafter string) (config Config) {
+type Config struct {
+	Gui string
+	Trim []image.Point
+	Place []image.Point
+	Override []Override
+}
+
+func parse(cfg2 Config2) Config {
+	cfg := Config{
+		Gui: cfg2.Gui,
+		Trim: util.UiToPoints(cfg2.Trim),
+		Place: util.IArrToPoints(cfg2.Place),
+		Override: cfg2.Override,
+	}
+	return cfg
+}
+
+func Read(crafter string) Config {
+	config := Config2{}
 	file, err := ioutil.ReadFile("cfg/" + crafter + ".json")
 	if err != nil {
 		fmt.Println("Config read error: ", err)
 	}
 	json.Unmarshal(file, &config)
-	return
+	return parse(config)
 }

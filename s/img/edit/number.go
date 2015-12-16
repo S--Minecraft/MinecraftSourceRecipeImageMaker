@@ -70,7 +70,7 @@ func PasteNumberOffset(back *image.Image, num int, xx int, yy int, offsetX int, 
 	return
 }
 
-func PasteNumberArrOffset(back *image.Image, num int, place []int, offset []uint) {
-	PasteNumber(back, num, place[0]+16-int(offset[0]), place[1]+16-int(offset[1]))
+func PasteNumberArrOffset(back *image.Image, num int, place image.Point, offset image.Point) {
+	PasteNumber(back, num, place.X+16-offset.X, place.Y+16-offset.Y)
 	return
 }

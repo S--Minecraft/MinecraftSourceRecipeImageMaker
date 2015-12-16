@@ -27,14 +27,14 @@ func PasteOffset(back *image.Image, xx int, yy int, offsetX int, offsetY int, fr
 }
 
 // backの[x, y]にfrontを貼り付け
-func PasteArr(back *image.Image, arr []int, front *image.Image) {
-	Paste(back, arr[0], arr[1], front)
+func PasteArr(back *image.Image, arr image.Point, front *image.Image) {
+	Paste(back, arr.X, arr.Y, front)
 	return
 }
 
 // backの[x, y]にオフセットをつけてfrontを貼り付け
-func PasteArrOffset(back *image.Image, arr []int, offset []uint, front *image.Image) {
-	PasteOffset(back, arr[0], arr[1], int(offset[0]), int(offset[1]), front)
+func PasteArrOffset(back *image.Image, arr image.Point, offset image.Point, front *image.Image) {
+	PasteOffset(back, arr.X, arr.Y, offset.X, offset.Y, front)
 	return
 }
 
@@ -55,8 +55,8 @@ func OverrideMulti(front *image.Image, x1 int, y1 int, x2 int, y2 int, back *ima
 	return
 }
 
-func OverrideMultiArr(front *image.Image, from []int, back *image.Image, to []int) {
-	OverrideMulti(front, from[0], from[1], from[2], from[3], back, to[0], to[1])
+func OverrideMultiArr(front *image.Image, from []image.Point, back *image.Image, to image.Point) {
+	OverrideMulti(front, from[0].X, from[0].Y, from[1].X, from[1].Y, back, to.X, to.Y)
 	return
 }
 
