@@ -38,6 +38,7 @@ jsonからレシピの画像を生成します
 				}
 			]
 		}
+        ]
 }
 ```
 ※craftingTable, furnace, brewingStandが標準で使えます  
