@@ -1,7 +1,7 @@
 package edit
 
 import (
-	"../../cfgReader"
+	"github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/s/cfgReader"
 	"image"
 )
 

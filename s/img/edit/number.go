@@ -1,7 +1,7 @@
 package edit
 
 import (
-	"../load"
+	"github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/s/img/load"
 	"encoding/json"
 	"fmt"
 	"image"
