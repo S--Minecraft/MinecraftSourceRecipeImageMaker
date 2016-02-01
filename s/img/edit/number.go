@@ -1,9 +1,9 @@
 package edit
 
 import (
-	"github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/s/img/load"
 	"encoding/json"
 	"fmt"
+	"github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/s/img/load"
 	"image"
 	"io/ioutil"
 	"strconv"

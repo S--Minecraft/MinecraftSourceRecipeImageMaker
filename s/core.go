@@ -1,12 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/s/cfgReader"
 	"github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/s/img/edit"
 	"github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/s/img/load"
 	"github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/s/img/output"
 	"github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/s/recipeReader"
-	"fmt"
 	"image"
 	"regexp"
 	"sync"

@@ -1,9 +1,9 @@
 package cfgReader
 
 import (
-	"github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/s/util"
 	"encoding/json"
 	"fmt"
+	"github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/s/util"
 	"image"
 	"io/ioutil"
 )
