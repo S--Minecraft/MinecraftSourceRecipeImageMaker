@@ -3,12 +3,13 @@ jsonからレシピの画像を生成します
 
 ##Usage
 1. `cfgフォルダ`にマイクラのjar内にある`crafting_table.png`を入れる
-2. `assetsフォルダ`を作り、マイクラのjar内にあるアイテムの画像を階層なしで入れる
-3. `assetsフォルダ`に`**.json`というファイル(**はなんでもいいです)を作る
-4. その中に下のように書く
-5. `outputフォルダ`を作る
-6. `MinecraftSourceRecipeImageMaker.exe`(amd64とついているほうが64bit用、386とついているほうが32bit用です)をたたく
-7. `outputフォルダ`に画像が生成される
+1. `assetsフォルダ`を作り、マイクラのjar内にあるアイテムの画像を階層なしで入れる
+1. `assets/blockフォルダ`にマイクラのjar内にあるブロックの画像を階層なしで入れる
+1. `assetsフォルダ`に`**.json`というファイル(**はなんでもいいです)を作る
+1. その中に下のように書く
+1. `outputフォルダ`を作る
+1. `MinecraftSourceRecipeImageMaker.exe`(amd64とついているほうが64bit用、386とついているほうが32bit用です)をたたく
+1. `outputフォルダ`に画像が生成される
 ```
 {
 	"recipes": [
@@ -31,7 +32,7 @@ jsonからレシピの画像を生成します
 						"C": "beef_raw",
 						"D": "blaze_powder",
 						"E": "blaze_rod",
-						"F": "boat",
+						"F": "block/dirt",
 						"G": "beef_cooked"
 					},
 					"number": 2
@@ -56,5 +57,6 @@ shapeの1つ目が材料、2つ目が出力です
   
 imgはshapeでそれぞれ指定した文字がどの画像かを示します  
 例えば、Xはapple.pngが作画されます  
+"X": "block/dirt"などと指定するとブロック用の変形した画像になります
   
 numberは出力個数です、1つの場合は省略可能です  
