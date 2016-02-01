@@ -2,9 +2,10 @@
 jsonからレシピの画像を生成します  
 
 ##Usage
-1. `cfgフォルダ`にマイクラのjar内にある`crafting_table.png`を入れる
-1. `assetsフォルダ`を作り、マイクラのjar内にあるアイテムの画像を階層なしで入れる
+1. `cfgフォルダ`にマイクラのjar内にある`crafting_table.png`/`furnace.png`/`brewing_stand.png`を入れる
+1. `assetsフォルダ`にマイクラのjar内にあるアイテムの画像を階層なしで入れる
 1. `assets/blockフォルダ`にマイクラのjar内にあるブロックの画像を階層なしで入れる
+1. `assets/numberフォルダ`にマイクラのjar内にある`acsii.png`を入れる
 1. `assetsフォルダ`に`**.json`というファイル(**はなんでもいいです)を作る
 1. その中に下のように書く
 1. `outputフォルダ`と`ouput/blockフォルダ`を作る([#5](https://github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/issues/5))
