@@ -7,7 +7,7 @@ jsonからレシピの画像を生成します
 1. `assets/blockフォルダ`にマイクラのjar内にあるブロックの画像を階層なしで入れる
 1. `assetsフォルダ`に`**.json`というファイル(**はなんでもいいです)を作る
 1. その中に下のように書く
-1. `outputフォルダ`を作る
+1. `outputフォルダ`と`ouput/blockフォルダ`を作る([#5](https://github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/issues/5))
 1. `MinecraftSourceRecipeImageMaker.exe`(amd64とついているほうが64bit用、386とついているほうが32bit用です)をたたく
 1. `outputフォルダ`に画像が生成される
 ```
