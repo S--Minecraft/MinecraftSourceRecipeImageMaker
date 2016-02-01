@@ -42,6 +42,7 @@ func Read(crafter string) Config {
 	if err != nil {
 		fmt.Println("Config read error: ", err)
 	}
+	file = util.NormalizeUTF8BOM(file)
 	json.Unmarshal(file, &config)
 	return parse(config)
 }

@@ -1,0 +1,115 @@
+{
+	"recipes": [
+		{
+			"type": "craftingTable",
+			"recipe": [
+				{
+					"shape": [
+						"X", "","X",
+						"X","Y","X",
+						"X", "","X",
+						"Z"
+					],
+					"img": {
+						"X": "gold_nugget",
+						"Y": "apple",
+						"Z": "apple_golden"
+					},
+					"number": 2
+				},
+				{
+					"shape": [
+						"X","Y","X",
+						"Z","Y","Z",
+						"X","W","X",
+						"A"
+					],
+					"img": {
+						"X": "clay_ball",
+						"Y": "bucket_water",
+						"Z": "arrow",
+						"W": "bucket_lava",
+						"A": "beef_cooked"
+					},
+					"number": 5
+				},
+				{
+					"shape": [
+						"X","Y","X",
+						"Z","Y","Z",
+						"A","W","X",
+						"Y"
+					],
+					"img": {
+						"X": "clay_ball",
+						"Y": "bucket_water",
+						"Z": "blaze_powder",
+						"W": "bucket_lava",
+						"A": "beef_raw"
+					},
+					"number": 2
+				},
+				{
+					"shape": [
+						"X","Y","X",
+						"Z","Y","Z",
+						"A","W","X",
+						"Z"
+					],
+					"img": {
+						"X": "clay_ball",
+						"Y": "bucket_water",
+						"Z": "boat",
+						"W": "bucket_lava",
+						"A": "bone"
+					},
+					"number": 3
+				},
+				{
+					"shape": [
+						"X","Y","X",
+						"Z","Y","Z",
+						"A","W","X",
+						"Z"
+					],
+					"img": {
+						"X": "block/dirt",
+						"Y": "block/gold_ore",
+						"Z": "boat",
+						"W": "bucket_lava",
+						"A": "bone"
+					},
+					"number": 3
+				}
+			]
+		},
+		{
+			"type": "furnace",
+			"recipe": [
+				{
+					"shape": [
+						"X","Y","X"
+					],
+					"img": {
+						"X": "clay_ball",
+						"Y": "bucket_water"
+					}
+				}
+			]
+		},
+		{
+			"type": "brewingStand",
+			"recipe": [
+				{
+					"shape": [
+						"X","Y"
+					],
+					"img": {
+						"X": "clay_ball",
+						"Y": "bucket_water"
+					}
+				}
+			]
+		}
+	]
+}

@@ -1,6 +1,7 @@
 package recipeReader
 
 import (
+	"github.com/S--Minecraft/MinecraftSourceRecipeImageMaker/s/util"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -26,6 +27,7 @@ func Read(path string) (recipeMain RecipeMain) {
 	if err != nil {
 		fmt.Println("Recipe read error: ", err)
 	}
+	file = util.NormalizeUTF8BOM(file)
 	json.Unmarshal(file, &recipeMain)
 	return
 }
